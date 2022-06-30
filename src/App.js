@@ -1,38 +1,29 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Contxt } from './Components/Context';
-import Body from './Components/Body';
-import Chart from './Components/Chart'
-import './App.css'
+import React from "react";
+import "./styles/app.css";
+import Header from "./components/Header";
+import {Routes,Route} from "react-router-dom";
+// import Home from "./components/Routerdom/Home";
+// import About from "./components/Routerdom/About";
+// import Navigation from "./components/Navigationbar";
+// import UsersTable from "./components/UsersTable";
+import Header2 from "./components/Header2";
+// import Header3 from "./components/Header3";
 
-function App() {
-const [loading, setloading] = useState(true)
-  
+const App = () => {
+	return (
+		<div>
+		
+			<Header />
 
-  let deta=Contxt()
-  console.log(deta.data)
-  
+			{/* <Navigation/> */}
+     <Routes>
+       {/* <Route path='/' element={<Header>}/> */}
+	   <Route path='/top-users' element={<Header2/>}/>
+       {/* <Route path='/users'     element={<Header3/>}/> */}
+       {/* <Route path='/contact' element={<Contact/>}/> */}
+     </Routes>
+		</div>
 
-  useEffect(() => {
-    const get= async()=>{
-    let res = await axios.get('https://api.openweathermap.org/data/2.5/onecall?lat=12.9762&lon=77.6033&exclude=hourly,minutely,alerts&units=metric&appid=e86b454d14a437ecddee3f23628ee2aa')
-      deta.setcr(await res.data.current)
-    let data= await res.data.daily
-      deta.set(await data)
-      setloading(false)
-  }
-  get()
-  }, [])
-
-  if(loading) return <h1>loading</h1>
-
-
-  return (
-    <div  >
-      <Body/>
-      <Chart/>
-    </div>
-  );
-}
-
+	);
+};
 export default App;
